@@ -24,7 +24,7 @@ loader.load('models/table.glb', (gltf) => {
   const box = new THREE.Box3().setFromObject(table);
   const center = box.getCenter(new THREE.Vector3());
   table.position.sub(center);
-  table.scale.setScalar(0.2);
+  table.scale.setScalar(0.5);
   scene.add(table);
 
   controls.target.set(0, 0, 0);
