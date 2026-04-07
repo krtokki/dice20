@@ -13,7 +13,7 @@ document.body.appendChild( renderer.domElement );
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
-controls.dampingFactor = 3;
+controls.dampingFactor = 0.1;
 
 const loader = new GLTFLoader();
 let model;
