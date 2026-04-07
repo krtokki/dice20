@@ -13,7 +13,7 @@ document.body.appendChild( renderer.domElement );
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
-controls.dampingFactor = 0.02;
+controls.dampingFactor = 0.002;
 
 const loader = new GLTFLoader();
 let model;
@@ -40,7 +40,7 @@ const originalTarget = new THREE.Vector3(0, 0, 0);
 const currentSpherical = new THREE.Spherical();
 const targetSpherical = new THREE.Spherical().setFromVector3(originalPosition);
 
-const reboundSpeed = 0.0003;
+const reboundSpeed = 0.00006;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
