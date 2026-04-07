@@ -24,6 +24,7 @@ loader.load('models/table.glb', (gltf) => {
   scene.add(model);
 
   model.position.z = 1;
+  model.position.y = -1;
 });
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
