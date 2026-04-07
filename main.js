@@ -40,8 +40,8 @@ loader.load('models/lantern.glb', (gltf) => {
   scene.add(lantern);
 
   lantern.position.z = 3.5;
-  lantern.position.y = -0.5;
-  lantern.position.x = -0.5;
+  lantern.position.y = +0.3;
+  lantern.position.x = -0.9;
 });
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
