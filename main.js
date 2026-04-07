@@ -39,7 +39,7 @@ loader.load('models/lantern.glb', (gltf) => {
   lantern.rotation.x = Math.PI / 2.7;
   scene.add(lantern);
 
-  lantern.position.z = 1.9;
+  lantern.position.z = 2.3;
   lantern.position.y = -0.5;
   lantern.position.x = -0.5;
 });
