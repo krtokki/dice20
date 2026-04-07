@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 5000 );
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const light = new THREE.AmbientLight(0xffffff, 1); 
 scene.add(light);
@@ -23,10 +23,11 @@ let table;
 
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
+  table.scale.setScalar(5);
   scene.add(table);
 });
 
-camera.position.set = (5, 5, 5);
+camera.position.set = (0, 0, 5);
 
 function animate() {
   renderer.render( scene, camera );
