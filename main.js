@@ -16,9 +16,8 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.000018;
 
 const fifteenDeg = THREE.MathUtils.degToRad(15);
-const fiveDeg = THREE.MathUtils.degToRad(5);
 controls.minPolarAngle = Math.PI / 2 - fifteenDeg;
-controls.maxPolarAngle = Math.PI / 2 + fiveDeg;
+controls.maxPolarAngle = Math.PI / 2;
 controls.minAzimuthAngle = -fifteenDeg;
 controls.maxAzimuthAngle = fifteenDeg;
 
@@ -47,7 +46,7 @@ const originalTarget = new THREE.Vector3(0, 0, 0);
 const currentSpherical = new THREE.Spherical();
 const targetSpherical = new THREE.Spherical().setFromVector3(originalPosition);
 
-const reboundSpeed = 0.000006;
+const reboundSpeed = 0.000024;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
