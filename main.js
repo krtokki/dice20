@@ -6,7 +6,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setPixelRatio(0.17);
+renderer.setPixelRatio(0.13);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
@@ -52,7 +52,10 @@ let isInteracting = false;
 camera.position.copy(originalPosition);
 
 controls.addEventListener('start', () => { isInteracting = true; });
-controls.addEventListener('end', () => { isInteracting = false; });
+controls.addEventListener('end', () => {
+  isInteracting = false;
+  camera.lookAt(controls.target);
+});
 
 function animate() {
   requestAnimationFrame(animate);
