@@ -14,6 +14,8 @@ document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.000002;
+controls.minPolarAngle = Math.PI * 0.15;
+controls.maxPolarAngle = Math.PI / 5;
 
 const loader = new GLTFLoader();
 let model;
