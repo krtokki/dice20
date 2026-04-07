@@ -19,12 +19,12 @@ let model;
 
 loader.load('models/table.glb', (gltf) => {
   model = gltf.scene;
-  model.scale.setScalar(3.2);
+  model.scale.setScalar(3.3);
   model.rotation.x = Math.PI / 2.7;
   scene.add(model);
 
   model.position.z = 1;
-  model.position.y = -0.4;
+  model.position.y = -0.5;
 });
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
