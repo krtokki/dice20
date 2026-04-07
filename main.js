@@ -28,7 +28,7 @@ loader.load('models/table.glb', (gltf) => {
   scene.add(table);
 });
 
-camera.position.set = (0, 0, 5);
+camera.position.set = (10, 0, 5);
 
 function animate() {
   renderer.render( scene, camera );
