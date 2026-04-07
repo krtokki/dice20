@@ -20,7 +20,7 @@ let model;
 loader.load('models/table.glb', (gltf) => {
   model = gltf.scene;
   model.scale.setScalar(2.5);
-  model.rotation.x = Math.PI / 1.3;
+  model.rotation.x = Math.PI / 2.7;
   scene.add(model);
 });
 
