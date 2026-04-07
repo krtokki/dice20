@@ -70,9 +70,12 @@ function animate() {
     currentSpherical.theta = THREE.MathUtils.lerp(currentSpherical.theta, targetSpherical.theta, alpha);
     currentSpherical.radius = THREE.MathUtils.lerp(currentSpherical.radius, targetSpherical.radius, alpha);
     camera.position.setFromSpherical(currentSpherical);
-    if (dist < 0.01) {
-        camera.position.copy(originalPosition);
-        controls.target.copy(originalTarget);
+    if (dist > 0.01) {
+      camera.position.lerp(originalPosition, alpha);
+      controls.target.lerp(originalTarget, alpha);
+    } else {
+      camera.position.copy(originalPosition);
+      controls.target.copy(originalTarget);
     }
   }
   controls.update();
