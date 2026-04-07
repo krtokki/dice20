@@ -6,7 +6,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setPixelRatio(0.25);
+renderer.setPixelRatio(0.13);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
@@ -22,7 +22,7 @@ controls.minAzimuthAngle = -fifteenDeg;
 controls.maxAzimuthAngle = fifteenDeg;
 
 const loader = new GLTFLoader();
-let table, lantern;
+let table;
 
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
@@ -32,17 +32,6 @@ loader.load('models/table.glb', (gltf) => {
 
   table.position.z = 1;
   table.position.y = -0.5;
-});
-
-loader.load('models/lantern.glb', (gltf) => {
-  lantern = gltf.scene;
-  lantern.scale.setScalar(0.1);
-  lantern.rotation.x = Math.PI / 2.7;
-  scene.add(lantern);
-
-  lantern.position.z = 2.7;
-  lantern.position.y = +1.3;
-  lantern.position.x = -2;
 });
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
