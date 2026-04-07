@@ -16,8 +16,9 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.000018;
 
 const fifteenDeg = THREE.MathUtils.degToRad(15);
+const fiveDeg = THREE.MathUtils.degToRad(5);
 controls.minPolarAngle = Math.PI / 2 - fifteenDeg;
-controls.maxPolarAngle = Math.PI / 2 + fifteenDeg;
+controls.maxPolarAngle = Math.PI / 2 + fiveDeg;
 
 const loader = new GLTFLoader();
 let model;
