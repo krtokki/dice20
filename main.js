@@ -37,6 +37,10 @@ function animate() {
   if(!isInteracting) {
     camera.position.lerp(originalPosition, reboundSpeed);
     controls.target.lerp(originalTarget, reboundSpeed);
+    if (camera.position.distanceTo(originalPosition) < 0.01) {
+        camera.position.copy(originalPosition);
+        controls.target.copy(originalTarget);
+    }
   }
   controls.update();
   renderer.render( scene, camera );
