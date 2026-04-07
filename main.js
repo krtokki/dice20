@@ -39,9 +39,9 @@ loader.load('models/lantern.glb', (gltf) => {
   lantern.rotation.x = Math.PI / 2.7;
   scene.add(lantern);
 
-  lantern.position.z = 3.5;
-  lantern.position.y = +0.3;
-  lantern.position.x = -0.9;
+  lantern.position.z = 3.3;
+  lantern.position.y = +0.7;
+  lantern.position.x = -1.5;
 });
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
