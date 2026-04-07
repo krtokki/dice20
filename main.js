@@ -18,10 +18,26 @@ const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
-camera.position.z = 5;
+const originalPosition = new THREE.Vector3(0, 0, 5);
+const originalTarget = new THREE.Vector3(0, 0, 0);
+const snapSpeed = 0.05;
+let isInteracting = false;
+
+camera.position.copy(originalPosition);
+
+controls.addEventListener('start', () => {
+    isInteracting = true;
+});
+controls.addEventListener('end', () => {
+    isInteracting = false;
+});
 
 function animate() {
   requestAnimationFrame(animate);
+  if(!isInteracting) {
+    camera.position.lerp(originalPosition, 0.05);
+    controls.target.lerp(originalTarget, 0.05);
+  }
   controls.update();
   renderer.render( scene, camera );
 }
