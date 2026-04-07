@@ -25,13 +25,23 @@ const loader = new GLTFLoader();
 let model;
 
 loader.load('models/table.glb', (gltf) => {
-  model = gltf.scene;
-  model.scale.setScalar(3.3);
-  model.rotation.x = Math.PI / 2.7;
-  scene.add(model);
+  table = gltf.scene;
+  table.scale.setScalar(3.3);
+  table.rotation.x = Math.PI / 2.7;
+  scene.add(table);
 
-  model.position.z = 1;
-  model.position.y = -0.5;
+  table.position.z = 1;
+  table.position.y = -0.5;
+});
+
+loader.load('models/lantern.glb', (gltf) => {
+  lantern = gltf.scene;
+  lantern.scale.setScalar(3.3);
+  lantern.rotation.x = Math.PI / 2.7;
+  scene.add(lantern);
+
+  lantern.position.z = 1;
+  lantern.position.y = -0.5;
 });
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
