@@ -45,7 +45,7 @@ const originalTarget = new THREE.Vector3(0, 0, 0);
 const currentSpherical = new THREE.Spherical();
 const targetSpherical = new THREE.Spherical().setFromVector3(originalPosition);
 
-const reboundSpeed = 0.0006;
+const reboundSpeed = 0.006;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
@@ -58,15 +58,15 @@ function animate() {
   if (!isInteracting) {
     const dist = camera.position.distanceTo(originalPosition);
     currentSpherical.setFromVector3(camera.position);
-    currentSpherical.radius = THREE.MathUtils.lerp(currentSpherical.radius, targetSpherical.radius, reboundSpeed);
-    currentSpherical.phi = THREE.MathUtils.lerp(currentSpherical.phi, targetSpherical.phi, reboundSpeed);
-    currentSpherical.theta = THREE.MathUtils.lerp(currentSpherical.theta, targetSpherical.theta, reboundSpeed);
+    const phiDist = Math.abs(targetSpherical.phi - currentSpherical.phi);
+    const thetaDist = Math.abs(targetSpherical.theta - currentSpherical.theta);
+    const totalDist = phiDist + thetaDist + 0.01;
+    const alpha = reboundSpeed / totalDist;
+    currentSpherical.phi = THREE.MathUtils.lerp(currentSpherical.phi, targetSpherical.phi, alpha);
+    currentSpherical.theta = THREE.MathUtils.lerp(currentSpherical.theta, targetSpherical.theta, alpha);
+    currentSpherical.radius = THREE.MathUtils.lerp(currentSpherical.radius, targetSpherical.radius, alpha);
     camera.position.setFromSpherical(currentSpherical);
-    if (dist > 0.01) {
-      const alpha = reboundSpeed / dist;
-      camera.position.lerp(originalPosition, alpha);
-      controls.target.lerp(originalTarget, alpha);
-    } else {
+    if (dist < 0.01) {
         camera.position.copy(originalPosition);
         controls.target.copy(originalTarget);
     }
