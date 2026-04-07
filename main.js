@@ -45,6 +45,7 @@ const originalTarget = new THREE.Vector3(0, 0, 0);
 const currentSpherical = new THREE.Spherical();
 const targetSpherical = new THREE.Spherical().setFromVector3(originalPosition);
 
+const reboundSpeed = 0.0006;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
@@ -55,15 +56,17 @@ controls.addEventListener('end', () => { isInteracting = false; });
 function animate() {
   requestAnimationFrame(animate);
   if (!isInteracting) {
+    const dist = camera.position.distanceTo(originalPosition);
     currentSpherical.setFromVector3(camera.position);
     currentSpherical.radius = THREE.MathUtils.lerp(currentSpherical.radius, targetSpherical.radius, reboundSpeed);
     currentSpherical.phi = THREE.MathUtils.lerp(currentSpherical.phi, targetSpherical.phi, reboundSpeed);
     currentSpherical.theta = THREE.MathUtils.lerp(currentSpherical.theta, targetSpherical.theta, reboundSpeed);
     camera.position.setFromSpherical(currentSpherical);
-    camera.position.moveTowards(originalPosition, 0.0003);
-    controls.target.moveTowards(originalTarget, 0.0003);
-    currentSpherical.setFromVector3(camera.position);
-    if (camera.position.distanceTo(originalPosition) < 0.01) {
+    if (dist > 0.01) {
+      const alpha = reboundSpeed / dist;
+      camera.position.lerp(originalPosition, alpha);
+      controls.target.lerp(originalTarget, alpha);
+    } else {
         camera.position.copy(originalPosition);
         controls.target.copy(originalTarget);
     }
