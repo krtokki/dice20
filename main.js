@@ -22,9 +22,9 @@ loader.load('models/table.glb', (gltf) => {
   model.scale.setScalar(3.2);
   model.rotation.x = Math.PI / 2.7;
   scene.add(model);
-});
 
-model.position.z = 1;
+  model.position.z = 1;
+});
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
