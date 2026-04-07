@@ -46,7 +46,7 @@ const originalTarget = new THREE.Vector3(0, 0, 0);
 const currentSpherical = new THREE.Spherical();
 const targetSpherical = new THREE.Spherical().setFromVector3(originalPosition);
 
-const reboundSpeed = 0.00024;
+const reboundSpeed = 0.0024;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
