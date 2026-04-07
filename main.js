@@ -22,7 +22,7 @@ controls.minAzimuthAngle = -fifteenDeg;
 controls.maxAzimuthAngle = fifteenDeg;
 
 const loader = new GLTFLoader();
-let model;
+let table, lantern;
 
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
