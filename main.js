@@ -20,7 +20,7 @@ scene.add( cube );
 
 const originalPosition = new THREE.Vector3(0, 0, 5);
 const originalTarget = new THREE.Vector3(0, 0, 0);
-const snapSpeed = 0.05;
+const reboundSpeed = 0.02;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
@@ -35,8 +35,8 @@ controls.addEventListener('end', () => {
 function animate() {
   requestAnimationFrame(animate);
   if(!isInteracting) {
-    camera.position.lerp(originalPosition, 0.05);
-    controls.target.lerp(originalTarget, 0.05);
+    camera.position.lerp(originalPosition, reboundSpeed);
+    controls.target.lerp(originalTarget, reboundSpeed);
   }
   controls.update();
   renderer.render( scene, camera );
