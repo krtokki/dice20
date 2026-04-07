@@ -69,7 +69,6 @@ controls.addEventListener('end', () => {
 });
 
 function animate() {
-  requestAnimationFrame(animate);
   if (!isInteracting) {
     const dist = camera.position.distanceTo(originalPosition);
     currentSpherical.setFromVector3(camera.position);
