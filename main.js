@@ -15,6 +15,10 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.000018;
 
+const fifteenDeg = THREE.MathUtils.degToRad(15);
+controls.minPolarAngle = Math.PI / 2 - fifteenDeg;
+controls.maxPolarAngle = Math.PI / 2 + fifteenDeg;
+
 const loader = new GLTFLoader();
 let model;
 
