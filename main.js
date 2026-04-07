@@ -14,10 +14,13 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.05;
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+const loader = new GLTFLoader();
+let model;
+
+loader.load('models/table.glb', (gltf) => {
+  model = gltf.scene;
+  scene.add(model);
+});
 
 const originalPosition = new THREE.Vector3(0, 0, 5);
 const originalTarget = new THREE.Vector3(0, 0, 0);
