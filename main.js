@@ -34,10 +34,10 @@ loader.load('models/table.glb', (gltf) => {
   table.position.y = -0.5;
 });
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xe68b29, 0.5);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xf2d78d, 1);
 directionalLight.position.set(5, 10, 5);
 scene.add(directionalLight);
 
