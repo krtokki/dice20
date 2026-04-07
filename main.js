@@ -35,11 +35,11 @@ loader.load('models/table.glb', (gltf) => {
 
 loader.load('models/lantern.glb', (gltf) => {
   lantern = gltf.scene;
-  lantern.scale.setScalar(0.2);
+  lantern.scale.setScalar(0.13);
   lantern.rotation.x = Math.PI / 2.7;
   scene.add(lantern);
 
-  lantern.position.z = 2.3;
+  lantern.position.z = 3.5;
   lantern.position.y = -0.5;
   lantern.position.x = -0.5;
 });
