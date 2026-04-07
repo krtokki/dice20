@@ -20,22 +20,25 @@ scene.add( cube );
 
 const originalPosition = new THREE.Vector3(0, 0, 5);
 const originalTarget = new THREE.Vector3(0, 0, 0);
-const reboundSpeed = 0.0005;
+const currentSpherical = new THREE.Spherical();
+const targetSpherical = new THREE.Spherical().setFromVector3(originalPosition);
+
+const reboundSpeed = 0.0002;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
 
-controls.addEventListener('start', () => {
-    isInteracting = true;
-});
-controls.addEventListener('end', () => {
-    isInteracting = false;
-});
+controls.addEventListener('start', () => { isInteracting = true; });
+controls.addEventListener('end', () => { isInteracting = false; });
 
 function animate() {
   requestAnimationFrame(animate);
-  if(!isInteracting) {
-    camera.position.lerp(originalPosition, reboundSpeed);
+  if (!isInteracting) {
+    currentSpherical.setFromVector3(camera.position);
+    currentSpherical.radius = THREE.MathUtils.lerp(currentSpherical.radius, targetSpherical.radius, reboundSpeed);
+    currentSpherical.phi = THREE.MathUtils.lerp(currentSpherical.phi, targetSpherical.phi, reboundSpeed);
+    currentSpherical.theta = THREE.MathUtils.lerp(currentSpherical.theta, targetSpherical.theta, reboundSpeed);
+    camera.position.setFromSpherical(currentSpherical);
     controls.target.lerp(originalTarget, reboundSpeed);
     if (camera.position.distanceTo(originalPosition) < 0.01) {
         camera.position.copy(originalPosition);
