@@ -19,7 +19,7 @@ let model;
 
 loader.load('models/table.glb', (gltf) => {
   model = gltf.scene;
-  model.rotation.y = Math.PI / 2;
+  model.rotation.z = Math.PI / 2;
   scene.add(model);
 });
 
