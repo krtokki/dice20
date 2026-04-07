@@ -17,7 +17,7 @@ controls.dampingFactor = 0.05;
 const loader = new GLTFLoader();
 let model;
 
-loader.load('https://threejs.org/examples/models/gltf/Duck/glTF/Duck.gltf', (gltf) => {
+loader.load('.\models\table.glb', (gltf) => {
   model = gltf.scene;
   scene.add(model);
 });
