@@ -7,8 +7,6 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 
 const light = new THREE.AmbientLight(0xffffff, 1); 
 scene.add(light);
-scene.add(new THREE.GridHelper(20, 20));
-scene.add(new THREE.AxesHelper(10));
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setPixelRatio(1);
@@ -23,7 +21,9 @@ let table;
 
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
-  table.scale.setScalar(5);
+  const box = new THREE.Box3().setFromObject(table);
+  const center = box.getCenter(new THREE.Vector3());
+  table.position.sub(center);
   scene.add(table);
 });
 
