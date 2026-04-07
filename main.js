@@ -20,7 +20,7 @@ scene.add( cube );
 
 const originalPosition = new THREE.Vector3(0, 0, 5);
 const originalTarget = new THREE.Vector3(0, 0, 0);
-const reboundSpeed = 0.005;
+const reboundSpeed = 0.0005;
 let isInteracting = false;
 
 camera.position.copy(originalPosition);
