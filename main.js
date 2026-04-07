@@ -27,11 +27,11 @@ loader.load('models/table.glb', (gltf) => {
   table.scale.setScalar(0.5);
   scene.add(table);
 
-  controls.target.set(0, 0, 0);
+  controls.target.set(2, 0, 0);
   controls.update;
 });
 
-camera.position.set = (0, 0, 5);
+camera.position.set = (2, 0, 5);
 
 function animate() {
   renderer.render( scene, camera );
