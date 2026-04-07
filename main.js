@@ -17,7 +17,7 @@ controls.dampingFactor = 0.05;
 const loader = new GLTFLoader();
 let model;
 
-loader.load('https://github.com/krtokki/dndsetup/blob/main/models/table.glb?raw=true', (gltf) => {
+loader.load('./models/table.glb', (gltf) => {
   model = gltf.scene;
   scene.add(model);
 });
