@@ -50,7 +50,7 @@ function updateCameraForModelSize() {
   if (!model) return;
   const bbox = new THREE.Box3().setFromObject(model);
   const radius = bbox.getSize(new THREE.Vector3()).length() / 2;
-  const distance = radius * 2.5;
+  const distance = radius * 0.3;
   const direction = originalPosition.clone().normalize();
   originalPosition.copy(direction.multiplyScalar(distance));
   targetSpherical.setFromVector3(originalPosition);
