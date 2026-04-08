@@ -42,6 +42,7 @@ controls.mouseButtons = {
   MIDDLE: THREE.MOUSE.DOLLY,
   RIGHT: THREE.MOUSE.PAN
 };
+controls.enablePan = false;
 
 function animate() {
   controls.update();
