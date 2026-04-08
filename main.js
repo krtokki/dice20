@@ -41,9 +41,6 @@ controls.mouseButtons = {
   MIDDLE: THREE.MOUSE.DOLLY,
   RIGHT: THREE.MOUSE.PAN
 };
-controls.enablePan = true;
-controls.enableRotate = true;
-controls.screenSpacePanning = false;
 
 const minPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
 const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
@@ -51,10 +48,15 @@ const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
 
 function animate() {
   const distance = camera.position.distanceTo(controls.target);
-  const zoomFactor = Math.max(0.1, 1 - (distance / 1.3));
-  const currentMax = maxPanLimit.clone().multiplyScalar(zoomFactor);
-  const currentMin = minPanLimit.clone().multiplyScalar(zoomFactor);
-  controls.target.clamp(currentMin, currentMax);
+  if (distance <= 1.05) {
+    controls.enableRotate = false;
+    controls.enablePan = true;
+    controls.target.clamp(minPanLimit, maxPanLimit);
+  } else {
+    controls.enableRotate = true;
+    controls.enablePan = false;
+    controls.target.set(0, 0, -1);
+  }
   controls.update();
   console.log(camera.position);
   console.log('Azimuth (Horizontal):', controls.getAzimuthalAngle());
