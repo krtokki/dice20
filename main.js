@@ -52,7 +52,7 @@ window.addEventListener('wheel', (event) => {
   if (event.deltaY < 0 && !isZoomedIn) {
     isZoomedIn = true;
     applyCameraState(0, 1.3);
-  } elseif (event.deltaY > 0 && isZoomedIn) {
+  } else if (event.deltaY > 0 && isZoomedIn) {
     isZoomedIn = false;
     applyCameraState(currentPolarAngle + 25 * (Math.PI / 180), 1.3);
   }
