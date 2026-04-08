@@ -27,6 +27,10 @@ camera.lookAt(0, 0, -1);
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
+const currentPolarAngle = controls.getPolarAngle();
+controls.minPolarAngle = 0;
+controls.maxPolarAngle = currentPolarAngle + 15 * (Math.PI / 180);
+
 
 function animate() {
   controls.update();
