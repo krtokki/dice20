@@ -41,6 +41,7 @@ controls.mouseButtons = {
   MIDDLE: THREE.MOUSE.DOLLY,
   RIGHT: THREE.MOUSE.PAN
 };
+controls.enableRotate = false;
 
 const minPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
 const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
