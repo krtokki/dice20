@@ -26,10 +26,12 @@ camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
 
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.enableDamping = true;
 const currentPolarAngle = controls.getPolarAngle();
 controls.minPolarAngle = 0;
-controls.maxPolarAngle = currentPolarAngle + 15 * (Math.PI / 180);
+controls.maxPolarAngle = currentPolarAngle + 25 * (Math.PI / 180);
+controls.minAzimuthAngle = 5 * (Math.PI / 180);
+controls.maxAzimuthAngle = 5 * (Math.PI / 180);
+controls.enableDamping = true;
 
 
 function animate() {
