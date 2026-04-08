@@ -32,6 +32,7 @@ controls.maxPolarAngle = currentPolarAngle + 25 * (Math.PI / 180);
 controls.minAzimuthAngle = 0;
 controls.maxAzimuthAngle = 0;
 controls.enableDamping = true;
+controls.dampingFactor = 0.1;
 
 
 function animate() {
