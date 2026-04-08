@@ -33,6 +33,9 @@ controls.minAzimuthAngle = 0;
 controls.maxAzimuthAngle = 0;
 controls.enableDamping = true;
 controls.dampingFactor = 0.1;
+controls.rotateSpeed = 0.7;
+controls.minDistance = 1;
+controls.maxDistance = 2;
 
 
 function animate() {
