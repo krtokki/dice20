@@ -42,34 +42,6 @@ controls.mouseButtons = {
   MIDDLE: THREE.MOUSE.DOLLY,
   RIGHT: THREE.MOUSE.PAN
 };
-controls.enableRotate = false;
-controls.enableZoom = false;
-
-const angleTopDown = 0;
-const angleTilted = currentPolarAngle + (25 * Math.PI / 180);
-
-let isZoomedIn = false;
-window.addEventListener('wheel', (event) => {
-  if (event.deltaY < 0 && !isZoomedIn) {
-    isZoomedIn = true;
-    applyCameraState(angleTopDown, 1.3);
-  } else if (event.deltaY > 0 && isZoomedIn) {
-    isZoomedIn = false;
-    applyCameraState(angleTilted, 5);
-  }
-});
-
-function applyCameraState(angle, distance) {
-  controls.minPolarAngle = angle;
-  controls.maxPolarAngle = angle;
-  controls.minDistance = distance;
-  controls.maxDistance = distance;
-
-  const direction = new THREE.Vector3().subVectors(camera.position, controls.target).normalize();
-  camera.position.copy(controls.target).addScaledVector(direction, distance);
-  
-  controls.update();
-}
 
 function animate() {
   controls.update();
