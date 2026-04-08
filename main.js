@@ -13,7 +13,7 @@ loader.load( 'models/table.glb', function ( gltf ) {
   scene.add( table );
 });
 
-const light = new THREE.AmbientLight( 0x404040, 1 );
+const light = new THREE.AmbientLight( 0xffffff, 1 );
 scene.add( light );
 
 const renderer = new THREE.WebGLRenderer();
@@ -22,7 +22,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
-camera.position.set(0, 5, 20);
+camera.position.set(0, 5, 10);
 camera.lookAt(0, 0, 0);
 
 const controls = new OrbitControls( camera, renderer.domElement );
