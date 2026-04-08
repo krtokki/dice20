@@ -22,8 +22,8 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
-camera.position.set(0, 1, 1.5);
-camera.lookAt(0, 0, 0);
+camera.position.set(0, 0, 1.5);
+camera.lookAt(0, 0, -1);
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
