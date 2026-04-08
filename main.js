@@ -55,7 +55,7 @@ window.addEventListener('wheel', (event) => {
     applyCameraState(angleTopDown, 1.3);
   } else if (event.deltaY > 0 && isZoomedIn) {
     isZoomedIn = false;
-    applyCameraState(angleTilted, 1.3);
+    applyCameraState(angleTilted, 1.6);
   }
 });
 
