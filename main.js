@@ -45,15 +45,18 @@ controls.mouseButtons = {
   RIGHT: THREE.MOUSE.PAN
 };
 controls.enablePan = false;
+controls.enableZoom = false;
 
 function animate() {
   
   const livePolarAngle = controls.getPolarAngle();
   if (livePolarAngle < 0.01) {
     controls.enablePan = true;
+    controls.enableZoom = true;
     controls.target.clamp(minPanLimit, maxPanLimit);
   } else {
     controls.enablePan = false;
+    controls.enableZoom = false;
   }
 
   controls.update();
