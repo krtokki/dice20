@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/loaders/OrbitControls.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -24,6 +25,10 @@ document.body.appendChild( renderer.domElement );
 camera.position.set = (0, 5, 20);
 camera.lookAt(0, 0, 0);
 
+const controls = new OrbitControls( camera, renderer.domElement );
+controls.enableDamping = true;
+
 function animate() {
+  controls.update();
   renderer.render( scene, camera );
 }
