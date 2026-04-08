@@ -26,6 +26,7 @@ camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
 
 const controls = new OrbitControls( camera, renderer.domElement );
+controls.target.set(0, 0, -1);
 const currentPolarAngle = controls.getPolarAngle();
 controls.minPolarAngle = 0;
 controls.maxPolarAngle = currentPolarAngle + 25 * (Math.PI / 180);
@@ -44,21 +45,19 @@ controls.mouseButtons = {
 controls.enableRotate = false;
 controls.enableZoom = false;
 
-const minPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
-const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
+const angleTopDown = 0;
+const angleTilted = currentPolarAngle + (25 * Math.PI / 180);
 
 let isZoomedIn = false;
 window.addEventListener('wheel', (event) => {
   if (event.deltaY < 0 && !isZoomedIn) {
     isZoomedIn = true;
-    applyCameraState(0, 1.3);
+    applyCameraState(angleTopDown, 1.3);
   } else if (event.deltaY > 0 && isZoomedIn) {
     isZoomedIn = false;
-    applyCameraState(currentPolarAngle + 25 * (Math.PI / 180), 1.3);
+    applyCameraState(angleTilted, 1.3);
   }
 });
-
-const _tempVec = new THREE.Vector3();
 
 function applyCameraState(angle, distance) {
   controls.minPolarAngle = angle;
@@ -66,8 +65,8 @@ function applyCameraState(angle, distance) {
   controls.minDistance = distance;
   controls.maxDistance = distance;
 
-  _tempVec.subVectors(camera.position, controls.target).normalize();
-  camera.position.copy(controls.target).addScaledVector(_tempVec, distance);
+  const direction = new THREE.Vector3().subVectors(camera.position, controls.target).normalize();
+  camera.position.copy(controls.target).addScaledVector(direction, distance);
   
   controls.update();
 }
