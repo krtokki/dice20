@@ -29,8 +29,8 @@ const controls = new OrbitControls( camera, renderer.domElement );
 const currentPolarAngle = controls.getPolarAngle();
 controls.minPolarAngle = 0;
 controls.maxPolarAngle = currentPolarAngle + 25 * (Math.PI / 180);
-controls.minAzimuthAngle = -5 * (Math.PI / 180);
-controls.maxAzimuthAngle = 5 * (Math.PI / 180);
+controls.minAzimuthAngle = 0;
+controls.maxAzimuthAngle = 0;
 controls.enableDamping = true;
 
 
