@@ -5,8 +5,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const minPanLimit = new THREE.Vector3(-0.8, 1.3, -0.7);
-const maxPanLimit = new THREE.Vector3(0.8, 1.3, 0.7);
+const minPanLimit = new THREE.Vector3(-0.8, 0.7, -0.7);
+const maxPanLimit = new THREE.Vector3(0.8, 0.7, 0.7);
 
 let table;
 
