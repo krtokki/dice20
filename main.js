@@ -36,6 +36,13 @@ controls.dampingFactor = 0.05;
 controls.rotateSpeed = 0.7;
 controls.minDistance = 1;
 controls.maxDistance = 2;
+controls.mouseButtons = {
+  LEFT: THREE.MOUSE.ROTATE,
+  MIDDLE: THREE.MOUSE.DOLLY,
+  RIGHT: THREE.MOUSE.PAN
+};
+controls.enablePan = true;
+controls.enableRotate = true;
 
 const minPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
 const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
