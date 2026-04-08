@@ -22,6 +22,7 @@ renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
 camera.position.set = (0, 5, 20);
+camera.lookAt(0, 0, 0);
 
 function animate() {
   renderer.render( scene, camera );
