@@ -37,8 +37,8 @@ controls.rotateSpeed = 0.7;
 controls.minDistance = 1;
 controls.maxDistance = 2;
 
-const maxPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
-const minPanLimit = new THREE.Vector3(0.8, 1, 0.7);
+const minPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
+const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
 
 
 function animate() {
