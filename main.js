@@ -30,5 +30,8 @@ controls.enableDamping = true;
 
 function animate() {
   controls.update();
+  console.log(camera.position);
+  console.log('Azimuth (Horizontal):', controls.getAzimuthalAngle());
+  console.log('Polar (Vertical):', controls.getPolarAngle());
   renderer.render( scene, camera );
 }
