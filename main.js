@@ -26,7 +26,6 @@ camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
 
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.target.set(0, 0, -1);
 const currentPolarAngle = controls.getPolarAngle();
 controls.minPolarAngle = 0;
 controls.maxPolarAngle = currentPolarAngle + 25 * (Math.PI / 180);
