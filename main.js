@@ -58,6 +58,20 @@ window.addEventListener('wheel', (event) => {
   }
 });
 
+const _tempVec = new THREE.Vector3();
+
+function applyCameraState(angle, distance) {
+  controls.minPolarAngle = angle;
+  controls.maxPolarAngle = angle;
+  controls.minDistance = distance;
+  controls.maxDistance = distance;
+
+  _tempVec.subVectors(camera.position, controls.target).normalize();
+  camera.position.copy(controls.target).addScaledVector(_tempVec, distance);
+  
+  controls.update();
+}
+
 function animate() {
   controls.update();
   console.log(camera.position);
