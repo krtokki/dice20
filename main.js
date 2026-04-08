@@ -14,7 +14,7 @@ loader.load( 'models/table.glb', function ( gltf ) {
   scene.add( table );
 });
 
-const light = new THREE.AmbientLight( 0xffffff, 1 );
+const light = new THREE.AmbientLight( 0xffffff, 3 );
 scene.add( light );
 
 const renderer = new THREE.WebGLRenderer();
