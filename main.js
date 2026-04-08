@@ -5,6 +5,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const minPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
+const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
 
 let table;
 
@@ -45,6 +47,15 @@ controls.mouseButtons = {
 controls.enablePan = false;
 
 function animate() {
+  
+  const livePolarAngle = controls.getPolarAngle();
+  if (livePolarAngle < 0.01) {
+    controls.enablePan = true;
+    controls.target.clamp(minPanLimit, maxPanLimit);
+  } else {
+    controls.enablePan = false;
+  }
+
   controls.update();
   renderer.render( scene, camera );
 }
