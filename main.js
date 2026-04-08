@@ -47,17 +47,6 @@ const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
 
 
 function animate() {
-  const distance = camera.position.distanceTo(controls.target);
-  const livePolarAngle = controls.getPolarAngle();
-  if (distance <= 1.1 && livePolarAngle < 0.01) {
-    controls.enableRotate = false;
-    controls.enablePan = true;
-    controls.target.clamp(minPanLimit, maxPanLimit);
-  } else {
-    controls.enableRotate = true;
-    controls.enablePan = false;
-    controls.target.set(0, 0, -1);
-  }
   controls.update();
   console.log(camera.position);
   console.log('Azimuth (Horizontal):', controls.getAzimuthalAngle());
