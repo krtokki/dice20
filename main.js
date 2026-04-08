@@ -48,7 +48,8 @@ const maxPanLimit = new THREE.Vector3(0.8, 1, 0.7);
 
 function animate() {
   const distance = camera.position.distanceTo(controls.target);
-  if (distance <= 1.1 && currentPolarAngle < 0.01) {
+  const livePolarAngle = controls.getPolarAngle();
+  if (distance <= 1.1 && livePolarAngle < 0.01) {
     controls.enableRotate = false;
     controls.enablePan = true;
     controls.target.clamp(minPanLimit, maxPanLimit);
