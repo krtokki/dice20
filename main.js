@@ -22,7 +22,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
-camera.position.set(0, 1, 2);
+camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
 
 const controls = new OrbitControls( camera, renderer.domElement );
