@@ -9,7 +9,6 @@ let table;
 const loader = new GLTFLoader();
 loader.load( 'models/table.glb', function ( gltf ) {
   const table = gltf.scene;
-  table.scale.setScalar(0.5);
   scene.add( table );
 });
 
@@ -22,7 +21,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
-camera.position.set = (0, 0, 5);
+camera.position.set = (0, 5, 20);
 
 function animate() {
   renderer.render( scene, camera );
