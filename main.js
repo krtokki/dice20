@@ -37,8 +37,16 @@ controls.rotateSpeed = 0.7;
 controls.minDistance = 1;
 controls.maxDistance = 2;
 
+const maxPanLimit = new THREE.Vector3(-0.8, 1, -0.7);
+const minPanLimit = new THREE.Vector3(0.8, 1, 0.7);
+
 
 function animate() {
+  const distance = camera.position.distanceTo(controls.target);
+  const zoomFactor = Math.max(0.1, 1 - (distance / 1.3));
+  const currentMax = maxPanLimit.clone().multiplyScalar(zoomFactor);
+  const currentMin = minPanLimit.clone().multiplyScalar(zoomFactor);
+  controls.target.clamp(currentMin, currentMax);
   controls.update();
   console.log(camera.position);
   console.log('Azimuth (Horizontal):', controls.getAzimuthalAngle());
