@@ -4,11 +4,34 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Stats from 'three/addons/libs/stats.module.js';
 
+let world;
+
 async function initPhysics() {
   await RAPIER.init();
   const gravity = { x: 0.0, y: -9.81, z: 0.0 };
-  const world = new RAPIER.World(gravity);
-  setupScene(world);
+  world = new RAPIER.World(gravity);
+  createDebugFloor();
+}
+
+function createDebugFloor() {
+  const width = 1.0;
+  const height = 0.05;
+  const depth = 1.0;
+
+  let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0, 0);
+  let body = world.createRigidBody(bodyDesc);
+  let colliderDesc = RAPIER.ColliderDesc.cuboid(width, height, depth);
+  world.createCollider(colliderDesc, body);
+
+  const debugGeo = new THREE.BoxGeometry(width * 2, height * 2, depth * 2);
+  const debugMat = new THREE.MeshBasicMaterial({
+    color: 0x32CD32,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.3
+  });
+  const debugMesh = new THREE.Mesh(debugGeo, debugMat);
+  scene.add(debugMesh);
 }
 
 const scene = new THREE.Scene();
@@ -64,6 +87,10 @@ let frames = 0;
 let prevTime = performance.now();
 
 function animate() {
+
+  if (world) {
+    world.step();
+  }
   
   const livePolarAngle = controls.getPolarAngle();
 
@@ -97,3 +124,5 @@ function animate() {
 
   renderer.render(scene, camera);
 }
+
+initPhysics();
