@@ -60,6 +60,32 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
+function updateSize() {
+  const isPortrait = window.innerHeight > window.innerWidth;
+
+  let width, height;
+
+  if (isPortrait) {
+    // When vertical, we render "sideways"
+    // The horizontal width of our 16:9 scene is the phone's total height
+    width = window.innerHeight;
+    height = window.innerHeight * (9/16);
+  } else {
+    // Standard desktop/landscape view
+    width = window.innerWidth;
+    height = window.innerHeight;
+  }
+
+  // Force 16:9 framing regardless of screen shape
+  camera.aspect = 16 / 9;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
+}
+
+window.addEventListener('resize', updateSize);
+updateSize();
+
 camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
 const originalDistance = camera.position.length();
