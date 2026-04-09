@@ -1,6 +1,11 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Stats } from 'three/addons/libs/stats.module.js';
+
+const stats = new Stats();
+stats.showPanel(0);
+document.body.appendChild(stats.dom);
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
@@ -51,6 +56,9 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 function animate() {
+
+  stats.begin();
+  
   const livePolarAngle = controls.getPolarAngle();
 
   if (livePolarAngle < 0.01) {
@@ -74,4 +82,6 @@ function animate() {
   }
 
   renderer.render(scene, camera);
+
+  stats.end();
 }
