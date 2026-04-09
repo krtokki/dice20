@@ -15,10 +15,10 @@ async function initPhysics() {
 
 function createDebugFloor() {
   const width = 1.7;
-  const height = 0.15;
+  const height = 0.3;
   const depth = 1.0;
 
-  let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0, 0);
+  let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0.7, 0);
   let body = world.createRigidBody(bodyDesc);
   let colliderDesc = RAPIER.ColliderDesc.cuboid(width, height, depth);
   world.createCollider(colliderDesc, body);
@@ -31,6 +31,7 @@ function createDebugFloor() {
     opacity: 0.3
   });
   const debugMesh = new THREE.Mesh(debugGeo, debugMat);
+  debugMesh.position.y = 0.7;
   scene.add(debugMesh);
 }
 
