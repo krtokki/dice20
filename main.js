@@ -27,6 +27,7 @@ document.body.appendChild( renderer.domElement );
 
 camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
+const originalDistance = camera.position.length();
 
 const controls = new OrbitControls( camera, renderer.domElement );
 const currentPolarAngle = controls.getPolarAngle();
@@ -53,12 +54,15 @@ function animate() {
   if (livePolarAngle < 0.01) {
     controls.enablePan = true;
     controls.enableZoom = true;
-    controls.minDistance = 1;
+    controls.minDistance = 0.5;
     controls.maxDistance = 2;
     controls.target.clamp(minPanLimit, maxPanLimit);
   } else {
     controls.enablePan = false;
     controls.enableZoom = false;
+    const currentDist = camera.position.length();
+    const lerpedDist = THREE.MathUtils.lerp(currentDist, originalDistance, 0.1);
+    camera.position.setLength(lerpedDist);
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
   }
 
