@@ -1,3 +1,23 @@
+@media screen and (orientation: portrait) {
+  canvas {
+    /* 1. Rotate the scene */
+    transform: rotate(90deg);
+    transform-origin: center;
+
+    /* 2. Swap dimensions: 
+       The 'width' of your scene is now the 'height' of the phone */
+    width: 100vh !important; 
+    height: 56.25vh !important; /* 9/16 of the width */
+
+    /* 3. Center it on the tall screen */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50vh; /* Half of the new width */
+    margin-left: -28.125vh; /* Half of the new height */
+  }
+}
+
 #fps-counter {
   position: absolute;
   top: 20px;
