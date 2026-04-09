@@ -49,41 +49,34 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 function animate() {
-  // 1. Process rotation math first
-  controls.update();
-
   const livePolarAngle = controls.getPolarAngle();
 
-  if (livePolarAngle < 0.05) {
+  if (livePolarAngle < 0.01) {
     // --- TOP DOWN MODE ---
     controls.enablePan = true;
     controls.enableZoom = true;
-    
-    // Set ranges for free movement
     controls.minDistance = 0.5;
     controls.maxDistance = 2;
-
-    // Hard Wall Clamp (After update to prevent bounce)
+    
+    // Process movement first, then clamp to stop the bounce
+    controls.update();
     controls.target.clamp(minPanLimit, maxPanLimit);
   } else {
-    // --- THE GLIDE TRANSITION ---
+    // --- ROTATED MODE (GLIDE) ---
     controls.enablePan = false;
     controls.enableZoom = false;
 
-    // 1. Smoothly bring the pivot back
-    controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
-
-    // 2. Smoothly pull the "track" back to original distance
-    // Instead of setLength, we lerp the limits. 
-    // OrbitControls will naturally slide the camera to fit inside these limits.
+    // 1. Smoothly transition the orbit distance limits
+    // By lerping the limits, OrbitControls will naturally "squeeze" 
+    // the camera back to the original distance without jitter.
     controls.minDistance = THREE.MathUtils.lerp(controls.minDistance, originalDistance, 0.1);
     controls.maxDistance = THREE.MathUtils.lerp(controls.maxDistance, originalDistance, 0.1);
-    
-    // 3. Optional: If the camera is still slightly off-radius, nudge it
-    // This helps the "spiral" feel without the snapping.
-    if (Math.abs(camera.position.length() - originalDistance) > 0.01) {
-        camera.position.setLength(THREE.MathUtils.lerp(camera.position.length(), originalDistance, 0.1));
-    }
+
+    // 2. Smoothly bring the pivot point back to center
+    controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
+
+    // 3. Process the update AFTER setting the new lerped limits
+    controls.update();
   }
 
   renderer.render(scene, camera);
