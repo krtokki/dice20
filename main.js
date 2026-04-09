@@ -8,7 +8,7 @@ let world;
 
 async function initPhysics() {
   await RAPIER.init();
-  const gravity = { x: 0.0, y: -9.81, z: 0.0 };
+  const gravity = { x: 0.0, y: -9.80665, z: 0.0 };
   world = new RAPIER.World(gravity);
   createDebugFloor();
 }
