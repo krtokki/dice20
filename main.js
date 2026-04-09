@@ -47,6 +47,8 @@ controls.mouseButtons = {
 controls.enablePan = false;
 controls.enableZoom = false;
 
+const originalTarget = new THREE.Vector3(0, 0, 0);
+
 function animate() {
   
   const livePolarAngle = controls.getPolarAngle();
@@ -57,6 +59,7 @@ function animate() {
   } else {
     controls.enablePan = false;
     controls.enableZoom = false;
+    controls.target.lerp(originalTarget, 0.1);
   }
 
   controls.update();
