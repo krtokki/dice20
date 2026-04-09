@@ -66,8 +66,9 @@ const originalDistance = camera.position.length();
 
 const controls = new OrbitControls( camera, renderer.domElement );
 const currentPolarAngle = controls.getPolarAngle();
+const twentyfiveDeg = 25 * (Math.PI / 180);
 controls.minPolarAngle = 0;
-controls.maxPolarAngle = currentPolarAngle + 25 * (Math.PI / 180);
+controls.maxPolarAngle = currentPolarAngle + twentyfiveDeg;
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.rotateSpeed = 0.7;
