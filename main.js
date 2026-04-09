@@ -18,7 +18,7 @@ function createDebugFloor() {
   const height = 0.1;
   const depth = 1.25;
 
-  let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0.1, 0);
+  let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0.2, 0);
   let body = world.createRigidBody(bodyDesc);
   let colliderDesc = RAPIER.ColliderDesc.cuboid(width, height, depth);
   world.createCollider(colliderDesc, body);
@@ -31,7 +31,7 @@ function createDebugFloor() {
     opacity: 0.3
   });
   const debugMesh = new THREE.Mesh(debugGeo, debugMat);
-  debugMesh.position.y = 0.1;
+  debugMesh.position.y = 0.2;
   scene.add(debugMesh);
 }
 
