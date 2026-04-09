@@ -60,31 +60,38 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
-function updateSize() {
+function onWindowResize() {
+  let width, height;
   const isPortrait = window.innerHeight > window.innerWidth;
 
-  let width, height;
-
   if (isPortrait) {
-    // When vertical, we render "sideways"
-    // The horizontal width of our 16:9 scene is the phone's total height
+    // We are simulating landscape by rotating, 
+    // so logical width = phone height
     width = window.innerHeight;
-    height = window.innerHeight * (9/16);
+    height = window.innerHeight * (9 / 16);
   } else {
-    // Standard desktop/landscape view
+    // Normal landscape logic
     width = window.innerWidth;
     height = window.innerHeight;
+    
+    // Ensure we don't exceed 16:9 on ultra-wide PC monitors
+    if (width / height > 16 / 9) {
+        width = height * (16 / 9);
+    } else {
+        height = width * (9 / 16);
+    }
   }
 
-  // Force 16:9 framing regardless of screen shape
+  // Lock the internal camera aspect ratio to exactly 16:9
   camera.aspect = 16 / 9;
   camera.updateProjectionMatrix();
 
+  // Update renderer
   renderer.setSize(width, height);
 }
 
-window.addEventListener('resize', updateSize);
-updateSize();
+window.addEventListener('resize', onWindowResize);
+onWindowResize();
 
 camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
