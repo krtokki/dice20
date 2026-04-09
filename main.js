@@ -116,6 +116,12 @@ function animate() {
   if (world) {
     world.step();
   }
+
+  if (window.innerHeight > window.innerWidth) {
+    controls.rotateSpeed = -0.7; // Invert to match the 90deg flip
+  } else {
+    controls.rotateSpeed = 0.7;
+  }
   
   const livePolarAngle = controls.getPolarAngle();
 
