@@ -49,24 +49,47 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 function animate() {
-
+  // 1. Process all mouse movement and damping math first
+  // This calculates where the camera "wants" to be.
   controls.update();
-  controls.target.clamp(minPanLimit, maxPanLimit);
-  
+
   const livePolarAngle = controls.getPolarAngle();
+
   if (livePolarAngle < 0.01) {
+    // --- TOP DOWN MODE ---
     controls.enablePan = true;
     controls.enableZoom = true;
     controls.minDistance = 0.5;
     controls.maxDistance = 2;
+
+    // THE HARD WALL: Apply the clamp AFTER update to kill the "bounce"
+    controls.target.clamp(minPanLimit, maxPanLimit);
+
   } else {
+    // --- FOLLOW THE ORBIT TRANSITION ---
     controls.enablePan = false;
     controls.enableZoom = false;
-    const currentDist = camera.position.length();
-    const lerpedDist = THREE.MathUtils.lerp(currentDist, originalDistance, 0.1);
-    camera.position.setLength(lerpedDist);
+
+    // A. Lerp the Target: Pull the pivot point back to (0,0,0)
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
+
+    // B. Lerp the Radius: Pull the camera back to the original orbit distance
+    // This allows the user's current rotation to stay active while distance corrects
+    const currentDist = camera.position.length();
+    const targetDist = THREE.MathUtils.lerp(currentDist, originalDistance, 0.1);
+    camera.position.setLength(targetDist);
+
+    // C. Lock the Zoom: Sync limits so it lands at originalDistance
+    controls.minDistance = THREE.MathUtils.lerp(controls.minDistance, originalDistance, 0.1);
+    controls.maxDistance = THREE.MathUtils.lerp(controls.maxDistance, originalDistance, 0.1);
+    
+    // D. SAFETY LOCK: Prevent fast-drag "slide" in side-view
+    // If the mouse flick is very fast, force target to center immediately
+    if (livePolarAngle > 0.1) {
+        controls.target.set(0, 0, 0);
+    }
   }
-  
-  renderer.render( scene, camera );
+
+  // 2. Final Render
+  renderer.render(scene, camera);
 }
