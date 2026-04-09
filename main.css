@@ -1,20 +1,37 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Removes all scroll bars */
+  background: black;
+}
+
 @media screen and (orientation: portrait) {
   canvas {
-    /* 1. Rotate the scene */
-    transform: rotate(90deg);
-    transform-origin: center;
-
-    /* 2. Swap dimensions: 
-       The 'width' of your scene is now the 'height' of the phone */
-    width: 100vh !important; 
-    height: 56.25vh !important; /* 9/16 of the width */
-
-    /* 3. Center it on the tall screen */
+    /* 1. Force the rotated dimensions */
+    width: 100vh !important;  /* Canvas width is phone height */
+    height: 56.25vh !important; /* 9/16 of width */
+    
+    /* 2. Rotate and precisely re-center */
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -50vh; /* Half of the new width */
-    margin-left: -28.125vh; /* Half of the new height */
+    /* Rotate 90deg, then translate by -50% of the NEW width/height to center */
+    transform: translate(-50%, -50%) rotate(90deg);
+    
+    display: block; /* Removes baseline spacing */
+  }
+}
+
+@media screen and (orientation: landscape) {
+  canvas {
+    width: 100vw !important;
+    height: 56.25vw !important;
+    max-height: 100vh;
+    max-width: 177.78vh;
+    display: block;
+    margin: auto;
   }
 }
 
