@@ -48,7 +48,7 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 const originalTarget = new THREE.Vector3(0, 0, 0);
-const fixedDistance = camera.position.distanceTo(controls.target);
+const fixedDistance = camera.position.distanceTo(new THREE.Vector3(0,0,0));
 
 function animate() {
   
