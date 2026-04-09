@@ -48,6 +48,7 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 const originalTarget = new THREE.Vector3(0, 0, 0);
+const fixedDistance = camera.position.distanceTo(controls.target);
 
 function animate() {
   
@@ -55,10 +56,14 @@ function animate() {
   if (livePolarAngle < 0.01) {
     controls.enablePan = true;
     controls.enableZoom = true;
+    controls.minDistance = 1;
+    controls.maxDistance = 2;
     controls.target.clamp(minPanLimit, maxPanLimit);
   } else {
     controls.enablePan = false;
     controls.enableZoom = false;
+    controls.minDistance = fixedDistance;
+    controls.maxDistance = fixedDistance;
     controls.target.lerp(originalTarget, 0.1);
   }
 
