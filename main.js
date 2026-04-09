@@ -49,6 +49,9 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 function animate() {
+
+  controls.update();
+  controls.target.clamp(minPanLimit, maxPanLimit);
   
   const livePolarAngle = controls.getPolarAngle();
   if (livePolarAngle < 0.01) {
@@ -63,14 +66,6 @@ function animate() {
     const lerpedDist = THREE.MathUtils.lerp(currentDist, originalDistance, 0.1);
     camera.position.setLength(lerpedDist);
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
-  }
-
-  controls.update();
-
-  if (livePolarAngle < 0.01) {
-    controls.target.clamp(minPanLimit, maxPanLimit);
-  } else {
-    controls.target.set(0, 0, 0);
   }
   
   renderer.render( scene, camera );
