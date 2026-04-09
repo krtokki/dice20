@@ -51,6 +51,10 @@ controls.mouseButtons = {
 controls.enablePan = false;
 controls.enableZoom = false;
 
+const fpsValue = document.getElementById('fps-value');
+let frames = 0;
+let prevTime = performance.now();
+
 function animate() {
   
   const livePolarAngle = controls.getPolarAngle();
@@ -73,6 +77,14 @@ function animate() {
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.06);
 
     controls.update();
+  }
+
+  frames++;
+  const time = performance.now();
+  if (time >= prevTime + 1000) {
+    fpsValue.innerText = Math.round((frames * 1000) / (time - prevTime));
+    prevTime = time;
+    frames = 0;
   }
 
   renderer.render(scene, camera);
