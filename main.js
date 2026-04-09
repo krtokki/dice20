@@ -69,8 +69,8 @@ function animate() {
     // 1. Smoothly transition the orbit distance limits
     // By lerping the limits, OrbitControls will naturally "squeeze" 
     // the camera back to the original distance without jitter.
-    controls.minDistance = THREE.MathUtils.lerp(controls.minDistance, originalDistance, 0.03);
-    controls.maxDistance = THREE.MathUtils.lerp(controls.maxDistance, originalDistance, 0.03);
+    controls.minDistance = THREE.MathUtils.lerp(controls.minDistance, originalDistance, 0.1);
+    controls.maxDistance = THREE.MathUtils.lerp(controls.maxDistance, originalDistance, 0.1);
 
     // 2. Smoothly bring the pivot point back to center
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.03);
