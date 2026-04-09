@@ -41,7 +41,7 @@ controls.minDistance = 1;
 controls.maxDistance = 2;
 controls.mouseButtons = {
   LEFT: THREE.MOUSE.ROTATE,
-  MIDDLE: THREE.MOUSE.DOLLY,
+  MIDDLE: null,
   RIGHT: THREE.MOUSE.PAN
 };
 controls.enablePan = false;
