@@ -4,6 +4,13 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Stats from 'three/addons/libs/stats.module.js';
 
+async function initPhysics() {
+  await RAPIER.init();
+  const gravity = { x: 0.0, y: -9.81, z: 0.0 };
+  const world = new RAPIER.World(gravity);
+  setupScene(world);
+}
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
