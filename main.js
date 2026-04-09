@@ -19,7 +19,9 @@ loader.load( 'models/table.glb', function ( gltf ) {
 const light = new THREE.AmbientLight( 0xffffff, 2 );
 scene.add( light );
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+});
 renderer.setPixelRatio(1);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
@@ -52,30 +54,22 @@ function animate() {
   const livePolarAngle = controls.getPolarAngle();
 
   if (livePolarAngle < 0.01) {
-    // --- TOP DOWN MODE ---
     controls.enablePan = true;
     controls.enableZoom = true;
     controls.minDistance = 0.5;
     controls.maxDistance = 2;
     
-    // Process movement first, then clamp to stop the bounce
     controls.update();
     controls.target.clamp(minPanLimit, maxPanLimit);
   } else {
-    // --- ROTATED MODE (GLIDE) ---
     controls.enablePan = false;
     controls.enableZoom = false;
 
-    // 1. Smoothly transition the orbit distance limits
-    // By lerping the limits, OrbitControls will naturally "squeeze" 
-    // the camera back to the original distance without jitter.
     controls.minDistance = THREE.MathUtils.lerp(controls.minDistance, originalDistance, 0.06);
     controls.maxDistance = THREE.MathUtils.lerp(controls.maxDistance, originalDistance, 0.06);
 
-    // 2. Smoothly bring the pivot point back to center
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.06);
 
-    // 3. Process the update AFTER setting the new lerped limits
     controls.update();
   }
 
