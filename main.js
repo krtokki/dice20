@@ -56,7 +56,6 @@ function animate() {
     controls.enableZoom = true;
     controls.minDistance = 0.5;
     controls.maxDistance = 2;
-    controls.target.clamp(minPanLimit, maxPanLimit);
   } else {
     controls.enablePan = false;
     controls.enableZoom = false;
@@ -67,5 +66,12 @@ function animate() {
   }
 
   controls.update();
+
+  if (livePolarAngle < 0.01) {
+    controls.target.clamp(minPanLimit, maxPanLimit);
+  } else {
+    controls.target.set(0, 0, 0);
+  }
+  
   renderer.render( scene, camera );
 }
