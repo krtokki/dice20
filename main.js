@@ -49,47 +49,42 @@ controls.enablePan = false;
 controls.enableZoom = false;
 
 function animate() {
-  // 1. Process all mouse movement and damping math first
-  // This calculates where the camera "wants" to be.
+  // 1. Process rotation math first
   controls.update();
 
   const livePolarAngle = controls.getPolarAngle();
 
-  if (livePolarAngle < 0.01) {
+  if (livePolarAngle < 0.05) {
     // --- TOP DOWN MODE ---
     controls.enablePan = true;
     controls.enableZoom = true;
+    
+    // Set ranges for free movement
     controls.minDistance = 0.5;
     controls.maxDistance = 2;
 
-    // THE HARD WALL: Apply the clamp AFTER update to kill the "bounce"
+    // Hard Wall Clamp (After update to prevent bounce)
     controls.target.clamp(minPanLimit, maxPanLimit);
-
   } else {
-    // --- FOLLOW THE ORBIT TRANSITION ---
+    // --- THE GLIDE TRANSITION ---
     controls.enablePan = false;
     controls.enableZoom = false;
 
-    // A. Lerp the Target: Pull the pivot point back to (0,0,0)
+    // 1. Smoothly bring the pivot back
     controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.1);
 
-    // B. Lerp the Radius: Pull the camera back to the original orbit distance
-    // This allows the user's current rotation to stay active while distance corrects
-    const currentDist = camera.position.length();
-    const targetDist = THREE.MathUtils.lerp(currentDist, originalDistance, 0.1);
-    camera.position.setLength(targetDist);
-
-    // C. Lock the Zoom: Sync limits so it lands at originalDistance
+    // 2. Smoothly pull the "track" back to original distance
+    // Instead of setLength, we lerp the limits. 
+    // OrbitControls will naturally slide the camera to fit inside these limits.
     controls.minDistance = THREE.MathUtils.lerp(controls.minDistance, originalDistance, 0.1);
     controls.maxDistance = THREE.MathUtils.lerp(controls.maxDistance, originalDistance, 0.1);
     
-    // D. SAFETY LOCK: Prevent fast-drag "slide" in side-view
-    // If the mouse flick is very fast, force target to center immediately
-    if (livePolarAngle > 0.1) {
-        controls.target.set(0, 0, 0);
+    // 3. Optional: If the camera is still slightly off-radius, nudge it
+    // This helps the "spiral" feel without the snapping.
+    if (Math.abs(camera.position.length() - originalDistance) > 0.01) {
+        camera.position.setLength(THREE.MathUtils.lerp(camera.position.length(), originalDistance, 0.1));
     }
   }
 
-  // 2. Final Render
   renderer.render(scene, camera);
 }
