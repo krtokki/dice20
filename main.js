@@ -14,9 +14,9 @@ async function initPhysics() {
 }
 
 function createDebugFloor() {
-  const width = 1.8;
-  const height = 0.1;
-  const depth = 1.25;
+  const width = 1.85;
+  const height = 0.15;
+  const depth = 1.15;
 
   let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0.2, 0);
   let body = world.createRigidBody(bodyDesc);
@@ -67,8 +67,6 @@ const originalDistance = camera.position.length();
 const controls = new OrbitControls( camera, renderer.domElement );
 const currentPolarAngle = controls.getPolarAngle();
 const twentyfiveDeg = 25 * (Math.PI / 180);
-controls.minPolarAngle = 0;
-controls.maxPolarAngle = currentPolarAngle + twentyfiveDeg;
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.rotateSpeed = 0.7;
