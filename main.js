@@ -52,6 +52,7 @@ async function startApp() {
     scene.add( table );
     loader.load( 'models/d20.glb', function ( gltf ) {
       d20 = gltf.scene;
+      d20.scale.set(10, 10, 10);
       scene.add( d20 );
       d20.traverse((child) => {
         if (child.isMesh) {
@@ -76,7 +77,7 @@ function createDicePhysics(mesh) {
       .setRestitution(0.7)
       .setFriction(0.5);
   world.createCollider(clDesc, rigidBody);
-  mesh.parent.userData.physicsBody = rigidBody;
+  d20.userData.physicsBody = rigidBody;
   tempGeo.dispose();
 }
 
