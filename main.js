@@ -14,9 +14,9 @@ async function initPhysics() {
 }
 
 function createDebugFloor() {
-  const width = 1.9;
+  const width = 1.89;
   const height = 0.08;
-  const depth = 1.19;
+  const depth = 1.185;
 
   let bodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0.2, 0);
   let body = world.createRigidBody(bodyDesc);
