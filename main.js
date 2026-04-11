@@ -13,6 +13,8 @@ async function initPhysics() {
   createDebugFloor();
 }
 
+const loader = new GLTFLoader();
+
 function createDebugFloor() {
   const width = 1.89;
   const height = 0.037;
@@ -43,32 +45,36 @@ const maxPanLimit = new THREE.Vector3(1.4, 0.7, 1.6);
 
 let table, d20;
 
-const loader = new GLTFLoader();
-loader.load( 'models/table.glb', function ( gltf ) {
-  table = gltf.scene;
-  scene.add( table );
-  loader.load( 'models/d20.glb', function ( gltf ) {
-    d20 = gltf.scene;
-    scene.add( d20 );
-    d20.traverse((child) => {
-      if (child.isMesh) {
-        createDicePhysics(child);
-      }
+async function startApp() {
+  await initPhysics();
+  loader.load( 'models/table.glb', function ( gltf ) {
+    table = gltf.scene;
+    scene.add( table );
+    loader.load( 'models/d20.glb', function ( gltf ) {
+      d20 = gltf.scene;
+      scene.add( d20 );
+      d20.traverse((child) => {
+        if (child.isMesh) {
+          createDicePhysics(child);
+        }
+      });
     });
   });
-});
+}
 
 function createDicePhysics(mesh) {
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
       .setTranslation(0, 5, 0)
       .setCanSleep(false);
   let rigidBody = world.createRigidBody(rbDesc);
-  const vertices = mesh.geometry.attributes.position.array;
+  const tempGeo = mesh.geometry.clone().toNonIndexed();
+  const vertices = tempGeo.attributes.position.array;
   let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices))
       .setRestitution(0.7)
       .setFriction(0.5);
   world.createCollider(clDesc, rigidBody);
   mesh.parent.userData.physicsBody = rigidBody;
+  tempGeo.dispose();
 }
 
 const light = new THREE.AmbientLight( 0xffffff, 2 );
