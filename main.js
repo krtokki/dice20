@@ -49,7 +49,7 @@ async function startApp() {
   await initPhysics();
   loader.load( 'models/table.glb', function ( gltf ) {
     table = gltf.scene;
-    scene.add( table );
+    //scene.add( table );
     loader.load( 'models/d20.glb', function ( gltf ) {
       d20 = gltf.scene;
       d20.scale.set(7, 7, 7);
