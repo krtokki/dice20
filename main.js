@@ -60,7 +60,7 @@ function createDicePhysics(mesh) {
   let rigidBody = world.createRigidBody(rbDesc);
   const geometry = mesh.geometry;
   const vertices = geometry.attributes.position.array;
-  let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices));
+  let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices))
       .setRestitution(0.7)
       .setFriction(0.5);
   world.createCollider(clDesc, rigidBody);
