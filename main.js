@@ -67,7 +67,7 @@ startApp();
 
 function createDicePhysics(mesh) {
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
-      .setTranslation(0, 2, -1)
+      .setTranslation(0, 1, -1)
       .setCanSleep(false);
   let rigidBody = world.createRigidBody(rbDesc);
   const tempGeo = mesh.geometry.clone().toNonIndexed();
