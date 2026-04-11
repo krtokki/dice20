@@ -52,7 +52,7 @@ async function startApp() {
     //scene.add( table );
     loader.load( 'models/d20.glb', function ( gltf ) {
       d20 = gltf.scene;
-      d20.scale.set(7, 7, 7);
+      d20.scale.set(4, 4, 4);
       scene.add( d20 );
       d20.traverse((child) => {
         if (child.isMesh) {
@@ -68,7 +68,7 @@ startApp();
 
 function createDicePhysics(mesh) {
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
-      .setTranslation(0, 3, -1.2)
+      .setTranslation(0, 5, -1.2)
       .setCanSleep(true);
   let rigidBody = world.createRigidBody(rbDesc);
   rigidBody.setLinvel({ x: 0, y: 0, z: 0 }, true);
