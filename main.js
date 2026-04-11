@@ -41,13 +41,31 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const minPanLimit = new THREE.Vector3(-1.4, 0.7, -1.6);
 const maxPanLimit = new THREE.Vector3(1.4, 0.7, 1.6);
 
-let table;
+let table, d20;
 
 const loader = new GLTFLoader();
 loader.load( 'models/table.glb', function ( gltf ) {
   table = gltf.scene;
   scene.add( table );
+loader.load( 'models/d20.glb', function ( gltf ) {
+  d20 = gltf.scene;
+  scene.add( d20 );
+  createDicePhysics( d20 );
 });
+
+function createDicePhysics(mesh) {
+  let rbDesc = RAPIER.RigidBodyDesc.dynamic()
+      .setTranslation(0, 5, 0)
+      .setCanSleep(false);
+  let rigidBody = world.createRigidBody(rbDesc);
+  const geometry = mesh.geometry;
+  const vertices = geometry.attributes.position.array;
+  let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices));
+      .setRestitution(0.7)
+      .setFriction(0.5);
+  world.createCollider(clDesc, rigidBody);
+  mesh.userData.physicsBody = rigidBody;
+}
 
 const light = new THREE.AmbientLight( 0xffffff, 2 );
 scene.add( light );
@@ -88,6 +106,15 @@ function animate() {
 
   if (world) {
     world.step();
+  }
+
+  if (diceMesh.userData.physicsBody) {
+    const rb = diceMesh.userData.physicsBody;
+    const pos = rb.translation();
+    const rot = rb.rotation();
+
+    diceMesh.position.set(pos.x, pos.y, pos.z);
+    diceMesh.quaternion.set(rot.x, rot.y, rot.z, rot.w);
   }
   
   const livePolarAngle = controls.getPolarAngle();
