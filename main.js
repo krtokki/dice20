@@ -52,7 +52,7 @@ async function startApp() {
     scene.add( table );
     loader.load( 'models/d20.glb', function ( gltf ) {
       d20 = gltf.scene;
-      d20.scale.set(10, 10, 10);
+      d20.scale.set(7, 7, 7);
       scene.add( d20 );
       d20.traverse((child) => {
         if (child.isMesh) {
