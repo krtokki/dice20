@@ -14,7 +14,7 @@ async function initPhysics() {
 }
 
 function createDebugFloor() {
-  const width = 1.85;
+  const width = 1.9;
   const height = 0.08;
   const depth = 1.19;
 
