@@ -72,7 +72,8 @@ function createDicePhysics(mesh) {
       .setCanSleep(true);
   let rigidBody = world.createRigidBody(rbDesc);
   rigidBody.setLinvel({ x: 0, y: 0, z: 0 }, true);
-  rigidBody.setAngvel({ x: 0, y: 0, z: 0 }, true);
+  rigidBody.resetForces(true);
+  rigidBody.resetTorques(true);
   const tempGeo = mesh.geometry.clone().toNonIndexed();
   const vertices = tempGeo.attributes.position.array;
   let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices))
