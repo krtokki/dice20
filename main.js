@@ -58,9 +58,12 @@ async function startApp() {
           createDicePhysics(child);
         }
       });
+      renderer.setAnimationLoop(animate);
     });
   });
 }
+
+startApp();
 
 function createDicePhysics(mesh) {
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
@@ -85,7 +88,6 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setPixelRatio(1);
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
 camera.position.set(0, 1.3, 1.3);
@@ -159,5 +161,3 @@ function animate() {
 
   renderer.render(scene, camera);
 }
-
-initPhysics();
