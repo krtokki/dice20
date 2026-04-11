@@ -68,8 +68,11 @@ startApp();
 
 function createDicePhysics(mesh) {
   mesh.position.set(0, 0, 0);
+  mesh.rotation.set(0, 0, 0);
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
       .setTranslation(0, 5, -1.2)
+      .setLinearDamping(1.0)
+      .setAngularDamping(1.0)
       .setCanSleep(true);
   let rigidBody = world.createRigidBody(rbDesc);
   rigidBody.setRotation({ x: 0, y: 0, z: 0, w: 1 }, true);
@@ -81,8 +84,8 @@ function createDicePhysics(mesh) {
   tempGeo.center();
   const vertices = tempGeo.attributes.position.array;
   let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices))
-      .setRestitution(0.7)
-      .setFriction(0.5);
+      .setRestitution(0.3)
+      .setFriction(0.8);
   world.createCollider(clDesc, rigidBody);
   d20.userData.physicsBody = rigidBody;
   tempGeo.dispose();
@@ -125,8 +128,8 @@ let prevTime = performance.now();
 function animate() {
 
   if (world && d20 && d20.userData && d20.userData.physicsBody) {
-    world.step();
     const rb = d20.userData.physicsBody;
+    world.step();
     const pos = rb.translation();
     const rot = rb.rotation();
 
