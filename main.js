@@ -68,7 +68,7 @@ startApp();
 
 function createDicePhysics(mesh) {
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
-      .setTranslation(0, 2, -1.2)
+      .setTranslation(0, 3, -1.2)
       .setCanSleep(true);
   let rigidBody = world.createRigidBody(rbDesc);
   rigidBody.setLinvel({ x: 0, y: 0, z: 0 }, true);
