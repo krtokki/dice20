@@ -50,7 +50,11 @@ loader.load( 'models/table.glb', function ( gltf ) {
   loader.load( 'models/d20.glb', function ( gltf ) {
     d20 = gltf.scene;
     scene.add( d20 );
-    createDicePhysics( d20 );
+    d20.traverse((child) => {
+      if (child.isMesh) {
+        createDicePhysics(child);
+      }
+    });
   });
 });
 
@@ -59,13 +63,12 @@ function createDicePhysics(mesh) {
       .setTranslation(0, 5, 0)
       .setCanSleep(false);
   let rigidBody = world.createRigidBody(rbDesc);
-  const geometry = mesh.geometry;
-  const vertices = geometry.attributes.position.array;
+  const vertices = mesh.geometry.attributes.position.array;
   let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices))
       .setRestitution(0.7)
       .setFriction(0.5);
   world.createCollider(clDesc, rigidBody);
-  d20.userData.physicsBody = rigidBody;
+  mesh.parent.userData.physicsBody = rigidBody;
 }
 
 const light = new THREE.AmbientLight( 0xffffff, 2 );
@@ -109,7 +112,7 @@ function animate() {
     world.step();
   }
 
-  if (d20.userData.physicsBody) {
+  if (d20 && d20.userData && d20.userData.physicsBody) {
     const rb = d20.userData.physicsBody;
     const pos = rb.translation();
     const rot = rb.rotation();
