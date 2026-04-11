@@ -117,11 +117,8 @@ let prevTime = performance.now();
 
 function animate() {
 
-  if (world) {
+  if (world && d20 && d20.userData && d20.userData.physicsBody) {
     world.step();
-  }
-
-  if (d20 && d20.userData && d20.userData.physicsBody) {
     const rb = d20.userData.physicsBody;
     const pos = rb.translation();
     const rot = rb.rotation();
