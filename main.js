@@ -67,14 +67,18 @@ async function startApp() {
 startApp();
 
 function createDicePhysics(mesh) {
+  mesh.position.set(0, 0, 0);
   let rbDesc = RAPIER.RigidBodyDesc.dynamic()
       .setTranslation(0, 5, -1.2)
       .setCanSleep(true);
   let rigidBody = world.createRigidBody(rbDesc);
+  rigidBody.setRotation({ x: 0, y: 0, z: 0, w: 1 }, true);
   rigidBody.setLinvel({ x: 0, y: 0, z: 0 }, true);
+  rigidBody.setAngvel({ x: 0, y: 0, z: 0 }, true);
   rigidBody.resetForces(true);
   rigidBody.resetTorques(true);
   const tempGeo = mesh.geometry.clone().toNonIndexed();
+  tempGeo.center();
   const vertices = tempGeo.attributes.position.array;
   let clDesc = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices))
       .setRestitution(0.7)
