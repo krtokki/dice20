@@ -47,10 +47,11 @@ const loader = new GLTFLoader();
 loader.load( 'models/table.glb', function ( gltf ) {
   table = gltf.scene;
   scene.add( table );
-loader.load( 'models/d20.glb', function ( gltf ) {
-  d20 = gltf.scene;
-  scene.add( d20 );
-  createDicePhysics( d20 );
+  loader.load( 'models/d20.glb', function ( gltf ) {
+    d20 = gltf.scene;
+    scene.add( d20 );
+    createDicePhysics( d20 );
+  });
 });
 
 function createDicePhysics(mesh) {
@@ -64,7 +65,7 @@ function createDicePhysics(mesh) {
       .setRestitution(0.7)
       .setFriction(0.5);
   world.createCollider(clDesc, rigidBody);
-  mesh.userData.physicsBody = rigidBody;
+  d20.userData.physicsBody = rigidBody;
 }
 
 const light = new THREE.AmbientLight( 0xffffff, 2 );
@@ -108,13 +109,13 @@ function animate() {
     world.step();
   }
 
-  if (diceMesh.userData.physicsBody) {
-    const rb = diceMesh.userData.physicsBody;
+  if (d20.userData.physicsBody) {
+    const rb = d20.userData.physicsBody;
     const pos = rb.translation();
     const rot = rb.rotation();
 
-    diceMesh.position.set(pos.x, pos.y, pos.z);
-    diceMesh.quaternion.set(rot.x, rot.y, rot.z, rot.w);
+    d20.position.set(pos.x, pos.y, pos.z);
+    d20.quaternion.set(rot.x, rot.y, rot.z, rot.w);
   }
   
   const livePolarAngle = controls.getPolarAngle();
