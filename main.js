@@ -12,7 +12,7 @@ tablelightone.position.set(5, 10, 7);
 tablelightone.layers.set(1);
 scene.add( tablelightone );
 const tablelighttwo = new THREE.DirectionalLight( 0xffffff, 3.5 );
-tablelighttwo.position.set(-5, -10, 7);
+tablelighttwo.position.set(-5, -10, -7);
 tablelighttwo.layers.set(1);
 scene.add( tablelighttwo );
 
