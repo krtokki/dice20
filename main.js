@@ -7,7 +7,7 @@ import Stats from 'three/addons/libs/stats.module.js';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const light = new THREE.AmbientLight( 0xffffff, 3.5 );
+const light = new THREE.AmbientLight( 0xffffff, 2.5 );
 scene.add( light );
 
 const renderer = new THREE.WebGLRenderer({
