@@ -12,3 +12,10 @@
   pointer-events: none; 
   user-select: none;
 }
+
+#loading-screen {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: #000; color: #fff; z-index: 100;
+  display: flex; justify-content: center; align-items: center;
+  transition: opacity 0.5s ease-out;
+}
