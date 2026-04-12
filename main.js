@@ -7,10 +7,14 @@ import Stats from 'three/addons/libs/stats.module.js';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const light = new THREE.DirectionalLight( 0xffffff, 3.5 );
-light.position.set(5, 10, 7);
-light.layers.set(1);
-scene.add( light );
+const tablelightone = new THREE.DirectionalLight( 0xffffff, 3.5 );
+tablelightone.position.set(5, 10, 7);
+tablelightone.layers.set(1);
+scene.add( tablelightone );
+const tablelighttwo = new THREE.DirectionalLight( 0xffffff, 3.5 );
+tablelighttwo.position.set(-5, -10, 7);
+tablelighttwo.layers.set(1);
+scene.add( tablelighttwo );
 
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
