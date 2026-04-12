@@ -15,7 +15,8 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setPixelRatio(1);
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setAnimationLoop(animate); 
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setAnimationLoop(animate);
 document.body.appendChild( renderer.domElement );
 
 let table;
