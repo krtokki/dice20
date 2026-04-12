@@ -24,6 +24,8 @@ document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableRotate = true;
 controls.rotateSpeed = 0.5;
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
 
 let table;
 const loader = new GLTFLoader();
@@ -39,6 +41,8 @@ loader.load('models/table.glb', (gltf) => {
   });
   table.position.set(0, 0, 0);
   scene.add(table);
+  controls.target.copy(table.position);
+  controls.update();
 });
 
 camera.position.set(0, 1.3, 1.3);
@@ -59,5 +63,6 @@ function animate() {
     frames = 0;
   }
 
+  controls.update();
   renderer.render(scene, camera);
 }
