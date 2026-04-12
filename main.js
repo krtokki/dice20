@@ -27,7 +27,7 @@ loader.load('models/table.glb', (gltf) => {
 });
 
 camera.position.set(0, 1.3, 1.3);
-camera.lookAt(0, 0, -1);
+camera.lookAt(0, 0, 0);
 
 const fpsValue = document.getElementById('fps-value');
 let frames = 0;
