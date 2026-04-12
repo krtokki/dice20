@@ -52,7 +52,7 @@ loader.load('models/table.glb', (gltf) => {
     if (node.isMesh) {
       node.layers.set(1);
       node.material.metalness = 0;
-      node.material.roughness = 0.5;
+      node.material.roughness = 1;
       node.material.color.set(0xffffff);
     }
   });
