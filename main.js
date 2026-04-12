@@ -21,6 +21,10 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableRotate = true;
+controls.rotateSpeed = 0.5;
+
 let table;
 const loader = new GLTFLoader();
 loader.load('models/table.glb', (gltf) => {
