@@ -19,6 +19,14 @@ renderer.setPixelRatio(1);
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+let table;
+const loader = new GLTFLoader();
+loader.load('models/table.glb', (gltf) => {
+  table = gltf.scene;
+  table.position.set(0, 0, 0);
+  scene.add(table);
+});
+
 camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, -1);
 
