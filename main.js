@@ -9,6 +9,7 @@ scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const light = new THREE.DirectionalLight( 0xffffff, 3.5 );
 light.position.set(5, 10, 7);
+light.layers.set(1);
 scene.add( light );
 
 const renderer = new THREE.WebGLRenderer({
@@ -26,6 +27,7 @@ loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
   table.traverse((node) => {
     if (node.isMesh) {
+      node.layers.set(1);
       node.material.metalness = 0.1;
       node.material.roughness = 0.5;
       node.material.color.set(0xffffff);
@@ -37,6 +39,7 @@ loader.load('models/table.glb', (gltf) => {
 
 camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, 0);
+camera.layers.enable(1);
 
 const fpsValue = document.getElementById('fps-value');
 let frames = 0;
