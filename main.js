@@ -23,6 +23,12 @@ let table;
 const loader = new GLTFLoader();
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
+  table.traverse((node) => {
+    if (node.isMesh) {
+      node.material.metalness = 0;
+      node.material.roughness = 1;
+    }
+  });
   table.position.set(0, 0, 0);
   scene.add(table);
 });
