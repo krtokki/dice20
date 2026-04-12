@@ -18,7 +18,6 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(1);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -66,3 +65,5 @@ function animate() {
   controls.update();
   renderer.render(scene, camera);
 }
+
+renderer.setAnimationLoop( animate );
