@@ -4,6 +4,20 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Stats from 'three/addons/libs/stats.module.js';
 
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onLoad = function() {
+  const loadingScreen = document.getElementById('loading-screen');
+  loadingScreen.style.opacity = '0';
+  setTimeout(() => {
+    loadingScreen.style.display = 'none';
+  }, 500);
+};
+
+loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
+  const progress = (itemsLoaded / itemsTotal) * 100;
+  console.log(`Loading: ${Math.round(progress)}%`);
+};
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0e9b6);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -31,7 +45,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 
 let table;
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(loadingManager);
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
   table.traverse((node) => {
