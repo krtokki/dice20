@@ -53,7 +53,7 @@ loader.load('models/table.glb', (gltf) => {
       node.layers.set(1);
       node.material.metalness = 0;
       node.material.roughness = 0.05;
-      noad.material.clearcoat = 1.0;
+      node.material.clearcoat = 1.0;
       clearcoatRoughness: 0;
       ior: 1.5;
       node.material.color.set(0xffffff);
