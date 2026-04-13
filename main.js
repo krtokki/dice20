@@ -39,6 +39,7 @@ rimlighttable.angle = Math.PI / 6;
 rimlighttable.penumbra = 0.5;
 rimlighttable.decay = 2;
 rimlighttable.distance = 50;
+rimlighttable.layers.set(1);
 scene.add(rimlighttable);
 
 camera.position.set(0, 1.3, 1.3);
