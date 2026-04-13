@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import RAPIER from 'rapier3d-compat';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import Stats from 'three/addons/libs/stats.module.js';
 
 const loadingManager = new THREE.LoadingManager();
@@ -17,6 +18,8 @@ loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
   const progress = (itemsLoaded / itemsTotal) * 100;
   console.log(`Loading: ${Math.round(progress)}%`);
 };
+
+RectAreaLightUniformsLib.init();
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xead2a8);
