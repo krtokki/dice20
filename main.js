@@ -25,7 +25,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xead2a8);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const tablelightone = new THREE.RectAreaLight( 0xfde5c2, 1.5, 2, 4 );
-tablelightone.position.set(0, 5, -2);
+tablelightone.position.set(0, 2, -1);
 tablelightone.lookAt(0, 0, 0);
 tablelightone.layers.set(1);
 scene.add( tablelightone );
