@@ -36,7 +36,12 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(1);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild( renderer.domElement );
+const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+texture.anisotropy = maxAnisotropy;
+texture.minFilter = THREE.LinearMipmapLinearFilter;
+texture.generateMipmaps = true;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableRotate = true;
