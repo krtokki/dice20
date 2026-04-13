@@ -54,8 +54,8 @@ loader.load('models/table.glb', (gltf) => {
       node.material.metalness = 0;
       node.material.roughness = 0.05;
       node.material.clearcoat = 1.0;
-      clearcoatRoughness: 0;
-      ior: 1.5;
+      node.material.clearcoatRoughness: 0;
+      node.material.ior: 1.5;
       node.material.color.set(0xffffff);
     }
   });
