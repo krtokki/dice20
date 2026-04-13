@@ -29,7 +29,7 @@ tablelightone.position.set(0, 2, -1);
 tablelightone.lookAt(0, 0, 0);
 tablelightone.layers.set(1);
 scene.add( tablelightone );
-const tablelighttwo = new THREE.AmbientLight( 0xffffff, 2 );
+const tablelighttwo = new THREE.AmbientLight( 0xffffff, 3 );
 tablelighttwo.layers.set(1);
 scene.add( tablelighttwo );
 
