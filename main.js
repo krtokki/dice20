@@ -57,7 +57,7 @@ loader.load('models/table.glb', (gltf) => {
     if (node.isMesh && node.material.map) {
       node.layers.set(1);
       node.material.metalness = 0;
-      node.material.roughness = 0.05;
+      node.material.roughness = 0.15;
       node.material.clearcoat = 1.0;
       node.material.clearcoatRoughness = 0;
       node.material.ior = 1.5;
