@@ -30,13 +30,16 @@ tablelighttwo.position.set(-5, -10, -7);
 tablelighttwo.layers.set(1);
 scene.add( tablelighttwo );
 
+camera.position.set(0, 1.3, 1.3);
+camera.lookAt(0, 0, 0);
+camera.layers.enable(1);
+
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
 });
-renderer.setPixelRatio(1);
-renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -47,10 +50,11 @@ controls.dampingFactor = 0.05;
 
 let table;
 const loader = new GLTFLoader(loadingManager);
+const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
 loader.load('models/table.glb', (gltf) => {
   table = gltf.scene;
   table.traverse((node) => {
-    if (node.isMesh) {
+    if (node.isMesh && node.material.map) {
       node.layers.set(1);
       node.material.metalness = 0;
       node.material.roughness = 0.05;
@@ -58,6 +62,14 @@ loader.load('models/table.glb', (gltf) => {
       node.material.clearcoatRoughness = 0;
       node.material.ior = 1.5;
       node.material.color.set(0xffffff);
+      const maps = [node.material.map, node.material.normalMap, node.material.roughnessMap, node.material.metalnessMap];
+      maps.forEach((map) => {
+        if (map) {
+          map.anisotropy = maxAnisotropy;
+          map.minFilter = THREE.LinearMipmapLinearFilter;
+          map.needsUpdate = true;
+        }
+      });
     }
   });
   table.position.set(0, 0, 0);
@@ -65,10 +77,6 @@ loader.load('models/table.glb', (gltf) => {
   controls.target.copy(table.position);
   controls.update();
 });
-
-camera.position.set(0, 1.3, 1.3);
-camera.lookAt(0, 0, 0);
-camera.layers.enable(1);
 
 const fpsValue = document.getElementById('fps-value');
 let frames = 0;
