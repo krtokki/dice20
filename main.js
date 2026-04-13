@@ -21,8 +21,9 @@ loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xead2a8);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const tablelightone = new THREE.DirectionalLight( 0xffffff, 3.5 );
-tablelightone.position.set(5, 10, 7);
+const tablelightone = new THREE.RectAreaLight( 0xfde5c2, 1.5, 2, 4 );
+tablelightone.position.set(5, 5, 0);
+tablelightone.lookAt(0, 0, 0);
 tablelightone.layers.set(1);
 scene.add( tablelightone );
 const tablelighttwo = new THREE.AmbientLight( 0xffffff, 1.5 );
