@@ -15,7 +15,7 @@
 
 #loading-screen {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  background-color: #f0e9b6; color: #36454F; z-index: 100;
+  background-color: #ead2a8; color: #36454F; z-index: 100;
   display: flex; justify-content: center; align-items: center;
   transition: opacity 0.5s ease-out;
 }
