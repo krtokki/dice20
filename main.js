@@ -41,6 +41,9 @@ rimlighttable.decay = 2;
 rimlighttable.distance = 50;
 rimlighttable.layers.set(1);
 scene.add(rimlighttable);
+const ambientlighttable = new THREE.AmbientLight(0xffffff, 2);
+ambientlighttable.layers.set(1);
+scene.add(ambientlighttable);
 
 camera.position.set(0, 1.3, 1.3);
 camera.lookAt(0, 0, 0);
