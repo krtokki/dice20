@@ -19,7 +19,7 @@ loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
 };
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf0e9b6);
+scene.background = new THREE.Color(0xead2a8);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const tablelightone = new THREE.DirectionalLight( 0xffffff, 3.5 );
 tablelightone.position.set(5, 10, 7);
