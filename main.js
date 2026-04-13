@@ -19,8 +19,6 @@ loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
   console.log(`Loading: ${Math.round(progress)}%`);
 };
 
-RectAreaLightUniformsLib.init();
-
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xead2a8);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
